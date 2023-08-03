@@ -124,6 +124,11 @@ Groupname[0:1]- picks first two machines of the group
 Groupname[2:5]- picks 3,4,5 and 6 machines of the group
 Group separated by colon (:) can be used to use hosts from multiple groups.
 Groupname1:groupname2
+
+
+
+
+
 Ad-hoc Commands:
 ➢ Ad-hoc commands are commands which can be run individually to perform quick
 functions.

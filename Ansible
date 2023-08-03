@@ -46,7 +46,7 @@ k. Host: nodes which are automated by ansible.
 
 ####################################################################################################################################################################
 
-<b>Go to AWS account- create 3 EC2 instances in same AZ.</b> 
+Go to AWS account- create 3 EC2 instances in same AZ.
 Take access of all machines via putty.
 Now go inside ansible server and download ansible package
 # wgetd http://dl.fedoreaproject.org/pub/epel/epel-release-latest-7.noarch.rpm
@@ -107,6 +107,10 @@ Now verify, go to ansible server
 # cd ..
 # ssh 172.31.41.240
 Now you will enter into node1.
+
+
+
+
 Host Patterns:
 # vi /etc/ansible/hosts
 “all” pattern refers to all the machines in an inventory
@@ -135,6 +139,11 @@ $ ansible demo -a “ls-al”
 $ ansible demo -a “sudo yum install httpd -y” or
 $ ansible demo -ba “yum install httpd -y”
 $ ansible demo -ba “yum remove httpd -y”
+
+
+
+
+
 Ansible Modules:
 ➢ Ansible ships with a number of modules (called module library) that can be executed
 directly on remote hosts or through “playbooks”.
@@ -150,6 +159,12 @@ $ ansible demo -b -m user -a “name=raj”
 $ ansible demo -b -m copy -a “src=file4 dest=/tmp”
 $ ansible demo -m setup
 $ ansible demo -m setup -a “filter= *ipv4* ”
+
+
+
+
+
+
 Playbook:
 ➢ Playbooks in ansible are written in YAML format.
 ➢ It is human readable data serialization language and is commonly used for configuration
@@ -162,6 +177,11 @@ configuration files.
 a. Target section: defines the host against which playbooks task has to be executed.
 b. Variable: define variables
 c. Task section: list of modules that we need to run in an order.
+
+
+
+
+
 YAML (Yet Another Markup Language):
 ➢ For ansible nearly every YAML files starts with a list.
 ➢ Each item in the list is a list of key-value pairs commonly called as a directory.
@@ -186,6 +206,10 @@ Exp: fresher
 Extension for playbook files is .yml.
 Note: there should be space between : and value.
 Go to ansible server.
+
+
+
+
 Now create one playbook.
 # vi target.yml
 --- # target playbook
@@ -196,6 +220,10 @@ Now create one playbook.
 -gather_facts: yes
 Esc- :wq!
 $ ansible-playbook target.yml
+
+
+
+
 Variables:
 ➢ Ansible uses variables which are defined previously to enable more flexibility in playbooks
 and roles. They can be used to loop through a set of given values, access various
@@ -216,6 +244,11 @@ Tasks:
 -action: yum name= “{{packagename}}” state=install
 Esc - :wq!
 Now execute playbook $ ansible-playbook vars.yml
+
+
+
+
+
 Handlers Section:
 A handler is exactly the same as a task, but it will run when called by another task.
 Or
@@ -241,6 +274,11 @@ Action: service name=httpd state=restarted
 Esc- :wq!
 Now execute this playbook
 $ ansible-playbook handlers.yml
+
+
+
+
+
 Loops:
 Sometimes you want to repeat a task multiple time. In computer programming this is called as
 loops. Common ansible loops include changing ownership on several files and/or directories
@@ -266,6 +304,11 @@ Esc- :wq!
 $ansible-playbook loops.yml
 To verify go inside node1
 $cat /etc/passwd
+
+
+
+
+
 Conditions:
 Whenever we have different different scenarios we put conditions to the scenario.
 We put conditions in ansible by “when” statement.
@@ -281,6 +324,10 @@ When: ansible_os_family == “debian”
 -name: install apache for redhat
 Command: yum -y install httpd
 When: ansible_os_family == “redhat”
+
+
+
+
 Vault:
 Ansible allows keeping sensitive data such as passwords or key in encrypted files, rather that
 a plaintext in your playbooks.
@@ -294,6 +341,10 @@ To encrypt on existing playbook:
 $ ansible-vault encrypt target.yml
 To decrypt an encrypted playbook:
 $ ansible-vault decrypt target.yml
+
+
+
+
 Roles:
 ➢ We can use two techniques for reusing a set of tasks : includes and role.
 ➢ Roles are good for organizing tasks and encapsulating data needed to accomplish those
